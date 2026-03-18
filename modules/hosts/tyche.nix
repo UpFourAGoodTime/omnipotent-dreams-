@@ -1,4 +1,5 @@
 {
+  inputs,
   ...
 }:
 {
@@ -20,6 +21,7 @@
       inputs.self.nixosModules.disko-ext4
       inputs.self.nixosModules.dtbloader
       inputs.self.nixosModules.kde-plasma
+      inputs.self.nixosModules.asus-vivobook-s15
     ];
 
 
@@ -45,6 +47,33 @@
       pkgs.cavalier
     ];
 
+  };
+
+  flake.nixosModules.asus-vivobook-s15 =
+  {
+    ...
+  }:
+  {
+
+    imports = [
+      inputs.x1e-nixos-config.nixosModules.x1e
+    ];
+
+    networking.hostName = "system";
+    hardware.asus-vivobook-s15.enable = true;
+
+    nixpkgs.hostPlatform.system = "aarch64-linux";
+
+    # Uncomment this to allow unfree packages.
+    # nixpkgs.config.allowUnfree = true;
+
+    nix = {
+      channel.enable = false;
+      settings.experimental-features = [
+      "nix-command"
+        "flakes"
+        ];
+    };
   };
 
 }

@@ -23,6 +23,10 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    x1e-nixos-config = {
+      url = "github:UpFourAGoodTime/x1e-nixos-config";
+    };
+
     nixpkgs.url = "github:nixos/nixpkgs/25.11";
   };
 
