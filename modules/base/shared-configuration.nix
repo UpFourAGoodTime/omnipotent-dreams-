@@ -3,106 +3,99 @@
 }:
 {
   flake.nixosModules.shared-configuration =
-  {
-    ...
-  }:
-  {
+    {
+      ...
+    }:
+    {
 
-    imports = [
-      inputs.self.nixosModules.systemd-boot
-    ];
+      imports = [ ];
 
-    # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
+      # Allow unfree packages
+      nixpkgs.config.allowUnfree = true;
 
-    # Enable networking
-    networking.networkmanager.enable = true;
+      # Enable networking
+      networking.networkmanager.enable = true;
 
-    # Set your time zone.
-    time.timeZone = "America/Chicago";
+      # Set your time zone.
+      time.timeZone = "America/Chicago";
 
-    # Select internationalisation properties.
-    i18n.defaultLocale = "en_US.UTF-8";
+      # Select internationalisation properties.
+      i18n.defaultLocale = "en_US.UTF-8";
 
-    i18n.extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
+      i18n.extraLocaleSettings = {
+        LC_ADDRESS = "en_US.UTF-8";
+        LC_IDENTIFICATION = "en_US.UTF-8";
+        LC_MEASUREMENT = "en_US.UTF-8";
+        LC_MONETARY = "en_US.UTF-8";
+        LC_NAME = "en_US.UTF-8";
+        LC_NUMERIC = "en_US.UTF-8";
+        LC_PAPER = "en_US.UTF-8";
+        LC_TELEPHONE = "en_US.UTF-8";
+        LC_TIME = "en_US.UTF-8";
+      };
 
-    #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+      #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+      # Configure network proxy if necessary
+      # networking.proxy.default = "http://user:password@proxy:port/";
+      # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-    # To search, run:
-    # $ nix search wget
+      # To search, run:
+      # $ nix search wget
 
-    hardware.bluetooth.enable = true;
+      hardware.bluetooth.enable = true;
 
-    networking.firewall.enable = true;
-    nix.settings.trusted-users = [ "@wheel" ];
+      networking.firewall.enable = true;
+      nix.settings.trusted-users = [ "@wheel" ];
 
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-
-    environment.variables = {
-      NIX_SSHOPS = "-t";
-      EDITOR = "nano";
-      # For multi-value variables like PATH, use a Nix list
-      PATH = [
-        "/usr/local/bin"
-        "$PATH" # Include existing PATH
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
       ];
-      ZED_ALLOW_ROOT = "true";
+
+      environment.variables = {
+        NIX_SSHOPS = "-t";
+        EDITOR = "nano";
+        # For multi-value variables like PATH, use a Nix list
+        PATH = [
+          "/usr/local/bin"
+          "$PATH" # Include existing PATH
+        ];
+        ZED_ALLOW_ROOT = "true";
+      };
+
+      # Enable CUPS to print documents.
+      services.printing.enable = true;
+
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+
+      # Some programs need SUID wrappers, can be configured further or are
+      # started in user sessions.
+      # programs.mtr.enable = true;
+      # programs.gnupg.agent = {
+      #   enable = true;
+      #   enableSSHSupport = true;
+      # };
+
+      # List services that you want to enable:
+
+      # Enable the OpenSSH daemon.
+      # services.openssh.enable = true;
+
+      # Open ports in the firewall.
+      # networking.firewall.allowedTCPPorts = [ ... ];
+      # networking.firewall.allowedUDPPorts = [ ... ];
+      # Or disable the firewall altogether.
+      # networking.firewall.enable = false;
+
+      # This value determines the NixOS release from which the default
+      # settings for stateful data, like file locations and database versions
+      # on your system were taken. It‘s perfectly fine and recommended to leave
+      # this value at the release version of the first install of this system.
+      # Before changing this value read the documentation for this option
+      # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+      system.stateVersion = "25.05";
     };
-
-    # Enable CUPS to print documents.
-    services.printing.enable = true;
-
-    boot.kernelPackages = pkgs.linuxPackages_latest;
-
-    # Enable CUPS to print documents.
-    services.printing.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-
-    # Some programs need SUID wrappers, can be configured further or are
-    # started in user sessions.
-    # programs.mtr.enable = true;
-    # programs.gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
-
-    # List services that you want to enable:
-
-    # Enable the OpenSSH daemon.
-    # services.openssh.enable = true;
-
-    # Open ports in the firewall.
-    # networking.firewall.allowedTCPPorts = [ ... ];
-    # networking.firewall.allowedUDPPorts = [ ... ];
-    # Or disable the firewall altogether.
-    # networking.firewall.enable = false;
-
-    # This value determines the NixOS release from which the default
-    # settings for stateful data, like file locations and database versions
-    # on your system were taken. It‘s perfectly fine and recommended to leave
-    # this value at the release version of the first install of this system.
-    # Before changing this value read the documentation for this option
-    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "25.05";
-  };
 }

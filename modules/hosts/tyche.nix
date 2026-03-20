@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   ...
 }:
 {
@@ -11,69 +12,67 @@
   };
 
   flake.nixosModules.tyche-config =
-  {
-    ...
-  }:
-  {
+    {
+      ...
+    }:
+    {
 
-    imports = [
-      inputs.self.nixosModules.shared-configuration
-      inputs.self.nixosModules.disko-ext4
-      inputs.self.nixosModules.dtbloader
-      inputs.self.nixosModules.kde-plasma
-      inputs.self.nixosModules.asus-vivobook-s15
-    ];
+      imports = [
+        inputs.self.nixosModules.shared-configuration
+        inputs.self.nixosModules.disko-ext4
+        inputs.self.nixosModules.kde-plasma
+        inputs.self.nixosModules.gabriele-config
+        inputs.self.nixosModules.asus-vivobook-s15
+      ];
 
+      environment.systemPackages = [
 
-    environment.systemPackages = [
+        pkgs.nh
 
-      pkgs.wget
+        pkgs.wget
 
-      pkgs.nixd
-      pkgs.nil
+        pkgs.nixd
+        pkgs.nil
 
-      pkgs.git
+        pkgs.git
 
-      pkgs.nerd-fonts.jetbrains-mono
-      pkgs.nerd-fonts.hasklug
-      pkgs.nerd-fonts.hurmit
+        pkgs.nerd-fonts.jetbrains-mono
+        pkgs.nerd-fonts.hasklug
+        pkgs.nerd-fonts.hurmit
 
-      pkgs.python312Packages.yt-dlp
+        pkgs.python312Packages.yt-dlp
 
-      pkgs.makemkv
+        pkgs.obs-studio
+        pkgs.cavalier
+      ];
 
-      pkgs.obs-studio
-      pkgs.jamesdsp
-      pkgs.cavalier
-    ];
-
-  };
+    };
 
   flake.nixosModules.asus-vivobook-s15 =
-  {
-    ...
-  }:
-  {
+    {
+      ...
+    }:
+    {
 
-    imports = [
-      inputs.x1e-nixos-config.nixosModules.x1e
-    ];
+      imports = [
+        inputs.x1e-nixos-config.nixosModules.x1e
+      ];
 
-    networking.hostName = "system";
-    hardware.asus-vivobook-s15.enable = true;
+      networking.hostName = "system";
+      hardware.asus-vivobook-s15.enable = true;
 
-    nixpkgs.hostPlatform.system = "aarch64-linux";
+      nixpkgs.hostPlatform.system = "aarch64-linux";
 
-    # Uncomment this to allow unfree packages.
-    # nixpkgs.config.allowUnfree = true;
+      # Uncomment this to allow unfree packages.
+      # nixpkgs.config.allowUnfree = true;
 
-    nix = {
-      channel.enable = false;
-      settings.experimental-features = [
-      "nix-command"
-        "flakes"
+      nix = {
+        channel.enable = false;
+        settings.experimental-features = [
+          "nix-command"
+          "flakes"
         ];
+      };
     };
-  };
 
 }

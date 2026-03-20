@@ -5,22 +5,25 @@
   inputs = {
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     import-tree = {
       url = "github:vic/import-tree";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     x1e-nixos-config = {

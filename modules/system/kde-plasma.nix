@@ -1,24 +1,14 @@
 {
-  lib,
-  pkgs,
-  config,
   ...
 }:
 {
   flake.nixosModules.kde-plasma =
-  {
-    ...
-  }:
-  let
-    cfg = config.kde-plasma;
-  in
-  {
+    {
+      pkgs,
+      ...
+    }:
+    {
 
-    options.kde-plasma = {
-      enable = lib.mkEnableOption "enable KDE Plasma desktop";
-    };
-
-    config = lib.mkIf cfg.enable {
       services = {
         desktopManager.plasma6.enable = true;
         displayManager.sddm.enable = true;
@@ -47,6 +37,4 @@
       ];
 
     };
-
-  };
 }
