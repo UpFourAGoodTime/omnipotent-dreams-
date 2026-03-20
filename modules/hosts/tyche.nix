@@ -29,6 +29,7 @@
 
   flake.nixosModules.tyche-config =
     {
+    inputs,
      pkgs,
       ...
     }:
@@ -38,7 +39,6 @@
         inputs.self.nixosModules.shared-configuration
         inputs.self.nixosModules.disko-ext4
         inputs.self.nixosModules.gabriele-config
-        inputs.self.nixosModules.asus-vivobook-s15
       ];
 
       networking.hostName = "tyche";
