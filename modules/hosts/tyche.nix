@@ -25,6 +25,8 @@
         inputs.self.nixosModules.asus-vivobook-s15
       ];
 
+      networking.hostName = "tyche";
+
       environment.systemPackages = [
 
         pkgs.nh
