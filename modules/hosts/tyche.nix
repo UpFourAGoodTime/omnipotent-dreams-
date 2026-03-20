@@ -42,6 +42,7 @@
 
   flake.nixosModules.asus-vivobook-s15 =
     {
+      inputs,
       ...
     }:
     {
