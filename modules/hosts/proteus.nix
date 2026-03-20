@@ -8,6 +8,11 @@
     modules = [
       inputs.self.nixosModules.proteus-config
       inputs.self.nixosModules.proteus-hw-config
+      inputs.self.nixosModules.shared-configuration
+      inputs.self.nixosModules.disko-ext4
+      inputs.self.nixosModules.kde-plasma
+      inputs.self.nixosModules.systemd-boot
+      inputs.self.nixosModules.gabriele-config
     ];
   };
 
@@ -18,13 +23,7 @@
     }:
     {
 
-      imports = [
-        inputs.self.nixosModules.shared-configuration
-        inputs.self.nixosModules.disko-ext4
-        inputs.self.nixosModules.kde-plasma
-        inputs.self.nixosModules.systemd-boot
-        inputs.self.nixosModules.gabriele-config
-      ];
+      imports = [ ];
 
       networking.hostName = "proteus";
 
