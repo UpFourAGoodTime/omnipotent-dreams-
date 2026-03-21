@@ -49,7 +49,14 @@
         pkgs.obs-studio
         pkgs.jamesdsp
         pkgs.cavalier
+
+        pkgs.devenv
+        pkgs.cachix
       ];
+
+
+      cachix.push = "x1e-iso";
+
 
       boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 

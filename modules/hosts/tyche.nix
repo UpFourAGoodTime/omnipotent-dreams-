@@ -11,6 +11,7 @@
       inputs.self.nixosModules.disko-ext4
       inputs.self.nixosModules.gabriele-config
       inputs.x1e-nixos-config.nixosModules.x1e
+      inputs.self.nixosModules.systemd-boot
     ];
   };
 
