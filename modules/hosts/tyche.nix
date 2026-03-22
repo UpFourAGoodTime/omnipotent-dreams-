@@ -19,6 +19,7 @@
     {
      inputs,
      pkgs,
+     lib,
       ...
     }:
     {
@@ -42,6 +43,15 @@
       hardware.asus-vivobook-s15.enable = true;
 
       nixpkgs.hostPlatform.system = "aarch64-linux";
+
+      hardware.enableRedistributableFirmware = true;
+
+      networking.networkmanager = {
+      enable = true;
+      plugins = lib.mkForce [ ];
+      };
+
+      boot.kernel.sysctl."kernel.sysrq" = 80;
 
       # Uncomment this to allow unfree packages.
       # nixpkgs.config.allowUnfree = true;
